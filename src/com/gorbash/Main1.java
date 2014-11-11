@@ -1,9 +1,9 @@
-package com.company;
+package com.gorbash;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Main {
+public class Main1 {
 
     public static void main(String[] args) {
         Map<Character, Character> dictionary = new HashMap<>();
