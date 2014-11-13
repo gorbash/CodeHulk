@@ -1,0 +1,74 @@
+<script>
+function possibleLandingSpots(n, map) {
+  var mapSize = map.length;
+  var bMap = new Array(mapSize);
+  var ret = new Array();
+  for (i = 0; i < mapSize; i++) {
+    bMap[i] = new Array(mapSize);
+	for (j = 0; j < mapSize; j++) {
+		if (map[i].charAt(j) == '.') {
+			bMap[i][j] = true;
+		}
+		else {
+			bMap[i][j] = false;
+		}
+	}
+  }
+  //document.writeln("Binary map</br>");
+  //for (i = 0; i < mapSize; i++) {
+	//for (j = 0; j < mapSize; j++) {
+		//document.writeln( i + "," + j + " " + bMap[i][j]);
+	//}
+	//document.writeln("</br>");
+	//document.writeln("</br>");
+ //}
+  
+  
+  for (i = 0; i < mapSize - (n-1); i++)
+  {
+	for (j = 0; j < mapSize - (n-1); j++)
+	{
+		//document.writeln("running check[" + i + "," + j +"]");
+		if (checkSpot(i, j, n, bMap)) {
+			//document.writeln("<b>found[" + i + "," + j +"]</b></br>");
+			var retA = new Array(2);
+			retA[0] = i;
+			retA[1] = j
+			ret.push(retA);
+		}
+	}
+  
+  }
+
+  return ret;
+}
+
+function checkSpot(x, y, size, map) {
+    //document.writeln("checking[" + x + "," + y +"] size:"+size);
+	for (k = 0; k < size; k++) {
+		for (l = 0; l < size; l++) {
+			var one = x+k;
+			var two = y+l;
+			//document.writeln("check[" + one + "," + two +"]");
+			if (!map[one][two]) {
+				//document.writeln("not a chance[" + one + "," + two +"]</br>");
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+
+
+var s = new Date().getTime();
+var result = possibleLandingSpots(2, ["#.#",
+                                      "..#",
+                                      "..."]);						 
+var e = new Date().getTime();	
+
+for (i = 0; i< result.length;i++) {
+	document.write("[" + result[i] + "]</br>");
+}			
+document.write("<" + result + "> in " + (e-s) + "ms");
+</script>
